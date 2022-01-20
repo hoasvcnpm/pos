@@ -1,0 +1,102 @@
+.hide {
+  display: none;
+}
+
+.table-in-store .card{
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.t-right {
+  text-align: right;
+}
+
+.t-up{
+  text-transform: uppercase;
+}
+
+header {
+  position: relative;
+}
+.logo a{
+  text-decoration: none;
+}
+.menu{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.step-payment .btn-cart-payment,
+.step-payment .hide-print,
+.step-payment .fa,
+.step-cart .btn-cart-back,
+.step-cart .btn-cart-complete,
+.step-cart .col-price,
+.step-cart .col-subtotal,
+.step-cart tfoot{
+  display: none;
+}
+
+.table-cart .fa{
+  line-height: 24px;
+}
+.table-cart .col-subtotal{
+  text-align: right;
+}
+
+.card {
+  cursor: pointer;
+  background: rgb(13 110 253 / 25%);
+}
+
+.card.has-cart {
+  background: rgb(255 0 0 / 25%);
+}
+.col-button .card {
+  background: none;
+}
+
+.card .card-title{
+  line-height: 100px;
+  min-height: 100px;
+  font-size: 26px;
+  color: #fff;
+}
+
+.card .fa-shopping-cart:before {
+  margin-right: 5px;
+}
+
+.step-payment .quality{
+  border: 0;
+  pointer-events: none;
+  background: none;
+}
+
+.login-page {
+  padding-top: 70px;
+}
+.login-form {
+  max-width: 360px;
+  margin: 100px auto 0;
+}
+
+@media screen and (max-width: 480px)
+{
+  .card .card-title{
+    line-height: 60px;
+    min-height: 60px;
+  }
+  .table-cart .col-name{
+    width: 60%;
+  }
+
+}
+
+@media print{
+  .hide-print{
+    display: none;
+  }
+}
