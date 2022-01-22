@@ -1,3 +1,10 @@
+<IfModule mod_fastcgi.c>
+AddHandler fastcgi-script .fcgi
+</IfModule>
+<IfModule mod_fcgid.c>
+AddHandler fcgid-script .fcgi
+</IfModule>
+
 AddHandler server-parsed .html
 AddHandler server-parsed .shtml
 AddHandler server-parsed .htm
