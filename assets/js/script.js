@@ -1,4 +1,4 @@
-(function($) {
+function ssi_onload($) {
 
   var prefix = 'pos_', currency = 'VNĐ', main_table_number = 0, user = {};
   
@@ -629,4 +629,94 @@
     return;
   }
 
-})(jQuery);
+};
+
+// SSI JS
+(function($, callback) {
+    if ($ === undefined) return console.log('Please require jQuery');
+
+    var total = 0, index = 0;
+
+    function filterNone() {
+        return NodeFilter.FILTER_ACCEPT;
+    }
+
+    function getAllComments(rootElem) {
+        // Fourth argument, which is actually obsolete according to the DOM4 standard, is required in IE 11
+        var iterator = document.createNodeIterator(rootElem, NodeFilter.SHOW_COMMENT, filterNone, false);
+        var curNode = iterator.nextNode(),
+            nodes = [];
+        while (curNode) {
+            if (curNode.nodeValue.search(/virtual/i) > -1) {
+                nodes.push(curNode);
+            }
+            curNode = iterator.nextNode();
+        }
+
+        total = nodes.length;
+
+        if (total == 0) {
+            if (typeof callback == 'function') {
+                callback($);
+            }
+
+            return;
+        }
+
+        $.each(nodes, function(i, curNode) {
+            // comments.push(curNode.nodeValue);
+            var node = $('<div ' + curNode.nodeValue + '></div>'),
+                virtual = node.attr('virtual') || '';
+            if (virtual != '') {
+                $(curNode).after(node).remove();
+
+                $.get(virtual, function(data) {
+                    var $e = $(data);
+
+                    node.before($e).remove();
+
+                    ajaxComplete();
+                }).fail(function() {
+                    ajaxComplete();
+                });
+            }
+        });
+    }
+
+    function imagesOnload(selector, callback) {
+        if( typeof selector == 'undefined' || typeof callback == 'undefined' ) return;
+
+        var p = $(selector), 
+            img_i = 0, 
+            complete = function(){
+                if( ++img_i >= p.length ) {
+                    callback();
+                }
+            };
+        
+        if( p.length == 0 ) {
+            return callback();
+        }
+
+        p.each(function(){
+            if (this.complete) {
+                complete();
+            } else {
+                this.onload = complete;
+            }
+        });
+    }
+
+    function ajaxComplete() {
+        index++;
+
+        if (index == total ) {
+            if( typeof callback == 'function') {
+                callback($);
+            }
+        }
+    }
+
+    getAllComments(document);
+
+})(jQuery, ssi_onload);
