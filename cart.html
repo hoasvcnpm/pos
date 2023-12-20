@@ -25,12 +25,12 @@
 <body class="cart-page">
 	<div class="container">
 		<!--#include virtual="./assets/inc/header.shtml"-->
-		<section class="section-cart step-cart">
+		<section class="section-cart step-cart mt-3">
 			<div class="row row-header">
 				<div class="col">
 					<h3 class="t-up">BÀN SỐ <span class="carting-table-number"></span></h3>
 				</div>
-				<div class="col t-right">
+				<div class="col t-right hide-print">
 					<button type="button" class="btn btn-primary btn-close-cart">Đóng</button>
 				</div>
 			</div>
@@ -46,18 +46,21 @@
 				<tbody></tbody>
 				<tfoot>
 					<!-- <tr class="tr-tax">
-          <td scope="col"></td>
-          <td scope="col"></td>
-          <th scope="col">Thuế (10%):</th>
-          <th scope="col" class="tax">0</th>
-        </tr> -->
+						<td scope="col"></td>
+						<td scope="col"></td>
+						<th scope="col">Thuế (10%):</th>
+						<th scope="col" class="tax">0</th>
+					</tr> -->
 					<tr class="tr-total">
 						<th scope="col" colspan="2" class="col-label">Tổng cộng:</th>
 						<th scope="col" colspan="2" class="col-subtotal total">0</th>
 					</tr>
 				</tfoot>
 			</table>
-			<div class="row row-footer">
+			<div class="row row-footer hide-print">
+				<div class="col">
+					<a href="javascript:print();" class="btn btn-primary" >IN</a>
+				</div>
 				<div class="col t-right">
 					<button type="button" class="btn btn-primary btn-cart-payment">THANH TOÁN</button>
 					<button type="button" class="btn btn-secondary btn-cart-back">HỦY</button>

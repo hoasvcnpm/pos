@@ -30,8 +30,15 @@ header {
 	z-index: 1;
 }
 
+.menu .dropdown-toggle{
+	font-size: 20px;
+}
+
+.menu .nav-tabs{
+	border-bottom: 0;
+}
+
 .step-payment .btn-cart-payment,
-.step-payment .hide-print,
 .step-payment .fa,
 .step-cart .btn-cart-back,
 .step-cart .btn-cart-complete,

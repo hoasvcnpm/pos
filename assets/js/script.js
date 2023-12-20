@@ -283,11 +283,18 @@
 	}
 
 	function update_item(name, item) {
-		var id = item.id;
+		var id = item.id,
+			old = get_item(name, item.id);
+		
+		Object.keys(item).forEach( key => {
+			if(typeof old[key] != 'undefined') {
+				old[key] = item[key];
+			}
+		});
+		
+		old['updated'] = get_datetime();
 
-		item['updated'] = get_datetime();
-
-		localStorage.setItem(prefix + name + '_' + id, JSON.stringify(item));
+		localStorage.setItem(prefix + name + '_' + id, JSON.stringify(old));
 
 		return item;
 	}
@@ -328,8 +335,8 @@
 					buttons = [
 						'<a href="#" class="btn btn-primary btn-edit-menu"><i class="fa fa-edit"></i></a>',
 						'<a href="#" class="btn btn-danger btn-delete-menu"><i class="fa fa-trash"></i></a>',
-						// '<a href="#" class="btn btn-info btn-down-menu"><i class="fa chevron-down"></i></a>',
-						// '<a href="#" class="btn btn-info btn-up-menu"><i class="fa chevron-up"></i></a>',
+						// '<a href="#" class="btn btn-info btn-down-menu"><i class="fa fa-chevron-down"></i></a>',
+						// '<a href="#" class="btn btn-info btn-up-menu"><i class="fa fa-chevron-up"></i></a>',
 					];
 
 				td += '<td><span class="price">' + item.price + '</span> ' + currency + '</td>';
@@ -374,25 +381,27 @@
 				$('.btn-submit', p).on('click', function (e) {
 					var name = $('#menu_name').val(),
 						id = $('#menu_id').val(),
-						price = $('#menu_price').val(),
-						error = $('.error-message', popup);
+						price = $('#menu_price').val() * 1000,
+						error = $('.error-message', popup),
+						item = {};
 
 					if (name != '' && price > 0) {
-						var item = {
-							name: name,
-							price: price * 1000,
-						};
-
 						if (id == 0) {
-							item.id = add_item('menu', item);
+							item.id = add_item('menu', {
+								name: name,
+								price: price,
+							});
+
 							add_menu_item(tbody.find('tr').length, item);
 						} else {
-							item.id = id;
-							update_item('menu', item);
+							update_item('menu', {
+								id : id,
+								price : price
+							});
 
 							$('tr.menu-' + id).each(function () {
-								$('.name', this).text(item.name);
-								$('.price', this).text(item.price);
+								$('.name', this).text(name);
+								$('.price', this).text(price);
 							});
 						}
 
@@ -528,6 +537,60 @@
 				}
 			}
 
+			function update_quality(element) {
+				var self = $(element),
+					row = self.parents('.tr-cart-row'),
+					id = row.attr('data-id') || '',
+					menu_item = get_item('menu', row.attr('data-menu-id')),
+					quality = $('.quality', row),
+					value = parseInt(quality.val()),
+					item = {};
+
+				if (self.hasClass('fa-plus')) {
+					value++;
+
+					quality.val(value);
+				} else if (self.hasClass('fa-minus')) {
+					value--;
+					if (value < 0) {
+						value = 0;
+					}
+					
+					quality.val(value);
+				}
+
+				if (value == 0) {
+					row.addClass('hide-print');
+				} else {
+					row.removeClass('hide-print');
+				}
+
+				if (id === '') {
+					item = menu_item;
+					item.menu_id = menu_item.id;
+					item.table = main_table_number;
+					item.completed = 0;
+
+					delete item.id;
+				} else {
+					item = get_item('cart', id);
+				}
+
+				item.quality = value;
+
+				if (id === '' && value > 0) {
+					id = add_item('cart', item);
+					row.attr('data-id', id);
+				} else if (id != '' && value == 0) {
+					remove_item('cart', id);
+					row.attr('data-id', '');
+				} else if (value > 0) {
+					update_item('cart', item);
+				}
+
+				update_total();
+			}
+
 			list_menu.forEach((item) => {
 				var cart = list_cart.find((o) => o.menu_id == item.id),
 					id = '';
@@ -554,56 +617,9 @@
 			if (!p.hasClass('evented')) {
 				p.on('click', '.icon-quality', function (e) {
 					e.preventDefault();
-
-					var self = $(this),
-						row = self.parents('.tr-cart-row'),
-						id = row.attr('data-id') || '',
-						menu_item = get_item('menu', row.attr('data-menu-id')),
-						quality = $('.quality', row),
-						value = parseInt(quality.val()),
-						item = {};
-
-					if (self.hasClass('fa-plus')) {
-						value++;
-					} else {
-						value--;
-						if (value < 0) {
-							value = 0;
-						}
-					}
-
-					quality.val(value);
-
-					if (value == 0) {
-						row.addClass('hide-print');
-					} else {
-						row.removeClass('hide-print');
-					}
-
-					if (id === '') {
-						item = menu_item;
-						item.menu_id = menu_item.id;
-						item.table = main_table_number;
-						item.completed = 0;
-
-						delete item.id;
-					} else {
-						item = get_item('cart', id);
-					}
-
-					item.quality = value;
-
-					if (id === '' && value > 0) {
-						id = add_item('cart', item);
-						row.attr('data-id', id);
-					} else if (id != '' && value == 0) {
-						remove_item('cart', id);
-						row.attr('data-id', '');
-					} else if (value > 0) {
-						update_item('cart', item);
-					}
-
-					update_total();
+					update_quality(this);
+				}).on('change', '.quality', function () {
+					update_quality(this);
 				}).addClass('evented');
 			}
 

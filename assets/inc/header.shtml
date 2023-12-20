@@ -1,9 +1,9 @@
 <header class="row">
 	<div class="col-sm-3">
-		<h1 class="logo t-up"><a href="./index.html" title="Ứng dụng quản lý bán hàng">POS</a></h1>
+		<h1 class="logo t-up mt-2"><a href="./index.html" title="Ứng dụng quản lý bán hàng">POS</a></h1>
 	</div>
 	<div class="col-sm-9">
-		<div class="menu">
+		<div class="menu hide-print">
 			<ul class="nav nav-tabs">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
