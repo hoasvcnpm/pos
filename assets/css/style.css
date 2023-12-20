@@ -1,31 +1,33 @@
 .hide {
-  display: none;
+	display: none;
 }
 
-.table-in-store .card{
-  text-align: center;
-  margin-bottom: 15px;
+.table-in-store .card {
+	text-align: center;
+	margin-bottom: 15px;
 }
 
 .t-right {
-  text-align: right;
+	text-align: right;
 }
 
-.t-up{
-  text-transform: uppercase;
+.t-up {
+	text-transform: uppercase;
 }
 
 header {
-  position: relative;
+	position: relative;
 }
-.logo a{
-  text-decoration: none;
+
+.logo a {
+	text-decoration: none;
 }
-.menu{
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
+
+.menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
 }
 
 .step-payment .btn-cart-payment,
@@ -35,68 +37,70 @@ header {
 .step-cart .btn-cart-complete,
 .step-cart .col-price,
 .step-cart .col-subtotal,
-.step-cart tfoot{
-  display: none;
+.step-cart tfoot {
+	display: none;
 }
 
-.table-cart .fa{
-  line-height: 24px;
+.table-cart .fa {
+	line-height: 24px;
 }
-.table-cart .col-subtotal{
-  text-align: right;
+
+.table-cart .col-subtotal {
+	text-align: right;
 }
 
 .card {
-  cursor: pointer;
-  background: rgb(13 110 253 / 25%);
+	cursor: pointer;
+	background: rgb(13 110 253 / 25%);
 }
 
 .card.has-cart {
-  background: rgb(255 0 0 / 25%);
-}
-.col-button .card {
-  background: none;
+	background: rgb(255 0 0 / 25%);
 }
 
-.card .card-title{
-  line-height: 100px;
-  min-height: 100px;
-  font-size: 26px;
-  color: #fff;
+.col-button .card {
+	background: none;
+}
+
+.card .card-title {
+	line-height: 100px;
+	min-height: 100px;
+	font-size: 26px;
+	color: #fff;
 }
 
 .card .fa-shopping-cart:before {
-  margin-right: 5px;
+	margin-right: 5px;
 }
 
-.step-payment .quality{
-  border: 0;
-  pointer-events: none;
-  background: none;
+.step-payment .quality {
+	border: 0;
+	pointer-events: none;
+	background: none;
 }
 
 .login-page {
-  padding-top: 70px;
+	padding-top: 70px;
 }
+
 .login-form {
-  max-width: 360px;
-  margin: 100px auto 0;
+	max-width: 360px;
+	margin: 100px auto 0;
 }
 
-@media screen and (max-width: 480px)
-{
-  .card .card-title{
-    line-height: 60px;
-    min-height: 60px;
-  }
-  .table-cart .col-name{
-    width: 60%;
-  }
+@media screen and (max-width: 480px) {
+	.card .card-title {
+		line-height: 60px;
+		min-height: 60px;
+	}
 
+	.table-cart .col-name {
+		width: 60%;
+	}
 }
 
-@media print{
-  .hide-print{
-    display: none;
-  }
+@media print {
+	.hide-print {
+		display: none;
+	}
 }

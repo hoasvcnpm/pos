@@ -1,20 +1,23 @@
 <header class="row">
-  <div class="col-sm-3">
-    <h1 class="logo t-up"><a href="./index.html" title="Ứng dụng quản lý bán hàng">POS</a></h1>
-  </div>
-  <div class="col-sm-9">
-    <div class="menu">
-      <ul class="nav nav-tabs">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa fa-bars"></i></a>
-          <ul class="dropdown-menu">
-            <li class="active"><a href="table.html" class="dropdown-item" data-section="table">Bàn</a></li>
-            <li><a href="menu.html" class="dropdown-item" data-section="menu">Thực đơn</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item btn-logout" href="#">Đăng xuất</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
+	<div class="col-sm-3">
+		<h1 class="logo t-up"><a href="./index.html" title="Ứng dụng quản lý bán hàng">POS</a></h1>
+	</div>
+	<div class="col-sm-9">
+		<div class="menu">
+			<ul class="nav nav-tabs">
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+						aria-expanded="false"><i class="fa fa-bars"></i></a>
+					<ul class="dropdown-menu">
+						<li class="active"><a href="table.html" class="dropdown-item" data-section="table">Bàn</a></li>
+						<li><a href="menu.html" class="dropdown-item" data-section="menu">Thực đơn</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item btn-logout" href="#">Đăng xuất</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
 </header>
